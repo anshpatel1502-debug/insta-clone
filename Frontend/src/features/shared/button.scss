@@ -1,0 +1,37 @@
+.button {
+  border: none;
+  outline: none;
+  padding-inline: 1rem;
+  padding-block: 0.7rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &.primary-button {
+    background-color: red;
+    color: whitesmoke;
+  }
+
+  &:active {
+    scale: 0.90;
+  }
+}
+
+.btn {
+  border: none;
+  outline: none;
+  padding-inline: 0.5rem;
+  padding-block: 0.3rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &.secondary-button {
+    background-color: blue;
+    color: whitesmoke;
+  }
+
+  &:active {
+    scale: 0.90;
+  }
+}

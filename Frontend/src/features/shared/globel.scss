@@ -1,0 +1,20 @@
+@use "./button.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.459);
+  color: whitesmoke;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+a {
+  color: #d20c3d;
+  text-decoration: none;
+} 
