@@ -1,12 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getFeed, createPost, likePost, unLikePost } from "../../features/posts/services/post.api";
+import { getFeed, createPost, likePost, unLikePost } from "../../features/posts/services/post.api.js";
 import {
   followUser,
   unFollowUser,
   acceptFollowRequest,
   rejectFollowRequest,
   getPendingFollowRequests
-} from "../../features/posts/services/follow.api";
+} from "../../features/posts/services/follow.api.js";
 
 export const fetchFeed = createAsyncThunk(
   "posts/fetchFeed",

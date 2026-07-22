@@ -5,7 +5,7 @@ import {
   fetchPendingRequestsThunk,
   acceptRequestThunk,
   rejectRequestThunk
-} from "../../../store/slices/postSlice"
+} from "../../../store/slices/postSlice.js"
 
 export const useFollow = () => {
   const dispatch = useDispatch()

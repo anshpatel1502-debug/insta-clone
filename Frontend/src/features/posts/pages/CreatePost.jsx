@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import "../style/createPost.scss"
-import { usePost } from '../hook/usePost'
+import { usePost } from '../hook/usePost.js'
 import { useNavigate } from 'react-router'
 
 const createPost = () => {

@@ -5,7 +5,7 @@ import {
   createPostThunk,
   likePostThunk,
   unLikePostThunk
-} from "../../../store/slices/postSlice";
+} from "../../../store/slices/postSlice.js";
 
 export const usePost = () => {
   const dispatch = useDispatch()

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { useFollow } from "../hook/useFollow"
+import { useFollow } from "../hook/useFollow.js"
 import "../style/FollowRequestsModal.scss"
 
 const FollowRequestsModal = ({ isOpen, onClose }) => {

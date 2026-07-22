@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import "../style/feed.scss"
-import Post from '../components/Post'
-import Nav from '../../shared/components/Nav'
-import { usePost } from '../hook/usePost'
+import Post from '../components/Post.jsx'
+import Nav from '../../shared/components/Nav.jsx'
+import { usePost } from '../hook/usePost.js'
 
 const Feed = () => {
 

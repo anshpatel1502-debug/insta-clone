@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { router } from './App.routes'
+import { router } from './App.routes.jsx'
 import { RouterProvider } from 'react-router'
 import "./features/shared/globel.scss"
 import { Provider, useDispatch } from 'react-redux'
 import { store } from './store'
-import { fetchCurrentUser } from './store/slices/authSlice'
+import { fetchCurrentUser } from './store/slices/authSlice.js'
 
 const AppContent = () => {
   const dispatch = useDispatch()

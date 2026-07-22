@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useFollow } from "../hook/useFollow"                                                                       
+import { useFollow } from "../hook/useFollow.js"                                                                       
 
 const Post = ({ user, post, loading, handleLikePost, handleUnLikePost }) => {
 
