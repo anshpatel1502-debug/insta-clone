@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import "../style/form.scss"
-import { useAuth } from '../Hooks/useAuth'
+import { useAuth } from '../hooks/useAuth'
 
 const Login = () => {
   const [username, setUsername] = useState("")

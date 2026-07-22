@@ -18,3 +18,24 @@ export async function unFollowUser(username){
   return response.data
 
 }
+
+export async function acceptFollowRequest(username){
+
+  const response = await api.post("/api/users/follow/acceptRequest/"+username)
+  return response.data
+
+}
+
+export async function rejectFollowRequest(username){
+
+  const response = await api.post("/api/users/follow/rejectRequest/"+username)
+  return response.data
+
+}
+
+export async function getPendingFollowRequests(){
+
+  const response = await api.get("/api/users/follow/requests")
+  return response.data
+
+}

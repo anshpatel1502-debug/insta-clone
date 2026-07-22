@@ -5,6 +5,13 @@ const userController = require("../controllers/user.controller")
 const userRouter = express.Router()
 
 /**
+ * @route GET /api/users/follow/requests
+ * @description Get pending follow requests for logged in user
+ * @access Private
+ */
+userRouter.get("/follow/requests", identifyUser, userController.getPendingFollowRequestsController)
+
+/**
  * @route POST /api/users/follow/:username
  * @description Follow a user
  * @access Private

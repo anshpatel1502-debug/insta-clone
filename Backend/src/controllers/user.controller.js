@@ -30,6 +30,14 @@ async function followUserController(req, res) {
       followee: followeeUser._id
     })
     if (isAlreadyFollowing) {
+      if (isAlreadyFollowing.status === "rejected") {
+        isAlreadyFollowing.status = "pending"
+        await isAlreadyFollowing.save()
+        return res.status(200).json({
+          message: `Follow request sent to ${followeeUsername}`,
+          follow: isAlreadyFollowing
+        })
+      }
       return res.status(200).json({
         message: `Follow request already ${isAlreadyFollowing.status}`,
         follow: isAlreadyFollowing
@@ -42,20 +50,9 @@ async function followUserController(req, res) {
     })
 
     return res.status(201).json({
-      message: `user follow successfully to${followeeUsername}`,
+      message: `Follow request sent to ${followeeUsername}`,
       follow: followRecord
     })
-
-    // const followRecord = await followModel.create({
-    //   follower: followerId,
-    //   followee: followeeUser._id,
-    //   status: "pending"
-    // })
-
-    // return res.status(201).json({
-    //   message: `Follow request sent to ${followeeUsername}`,
-    //   follow: followRecord
-    // })
 
   } catch (err) {
     console.log(err)
@@ -198,9 +195,30 @@ async function unfollowUserController(req, res) {
   }
 }
 
+async function getPendingFollowRequestsController(req, res) {
+  try {
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ message: "Unauthorized" })
+    }
+    const followeeId = req.user._id
+    const requests = await followModel
+      .find({ followee: followeeId, status: "pending" })
+      .populate("follower", "username profileImage bio")
+
+    return res.status(200).json({
+      message: "Pending follow requests fetched successfully",
+      requests
+    })
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({ message: "Server error", error: err.message })
+  }
+}
+
 module.exports = {
   followUserController,
   unfollowUserController,
   acceptFollowRequestController,
-  rejectFollowRequestController
+  rejectFollowRequestController,
+  getPendingFollowRequestsController
 }

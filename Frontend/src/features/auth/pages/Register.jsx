@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
-import { useAuth } from '../Hooks/useAuth'
+import { useAuth } from '../hooks/useAuth'
 
 const Register = () => {
   const [username, setUsername] = useState("")

@@ -1,37 +1,96 @@
 .button {
   border: none;
   outline: none;
-  padding-inline: 1rem;
-  padding-block: 0.7rem;
-  border-radius: 1rem;
+  padding-inline: 1.25rem;
+  padding-block: 0.6rem;
+  border-radius: 20px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &.primary-button {
-    background-color: red;
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     color: whitesmoke;
+    box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
+
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(220, 39, 67, 0.45);
+    }
+  }
+
+  &.secondary-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: whitesmoke;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
   }
 
   &:active {
-    scale: 0.90;
+    transform: scale(0.95);
   }
 }
 
 .btn {
   border: none;
   outline: none;
-  padding-inline: 0.5rem;
-  padding-block: 0.3rem;
-  border-radius: 0.3rem;
+  padding-inline: 0.85rem;
+  padding-block: 0.4rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   &.secondary-button {
-    background-color: blue;
-    color: whitesmoke;
+    &.follow {
+      background-color: #0095f6;
+      color: #fff;
+
+      &:hover {
+        background-color: #1877f2;
+      }
+    }
+
+    &.requested {
+      background-color: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.18);
+        color: #fff;
+      }
+    }
+
+    &.following {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    &.logged-in {
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      cursor: default;
+      
+      &:hover {
+        background-color: rgba(74, 222, 128, 0.2);
+      }
+    }
   }
 
   &:active {
-    scale: 0.90;
+    transform: scale(0.94);
   }
 }

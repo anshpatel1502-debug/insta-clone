@@ -1,9 +1,55 @@
-import React, { use } from 'react'
-import {useFollow } from "../hook/useFollow"                                                                       
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useFollow } from "../hook/useFollow"                                                                       
 
 const Post = ({ user, post, loading, handleLikePost, handleUnLikePost }) => {
 
-  const { handleFollowUser,handleUnFollowUser } = useFollow()
+  const { user: currentUser } = useSelector((state) => state.auth)
+  const { handleFollowUser, handleUnFollowUser } = useFollow()
+
+  const followStatus = user?.followStatus || "none"
+  const isSelf = currentUser && currentUser.username === user?.username
+
+  const renderFollowButton = () => {
+    if (isSelf) {
+      return (
+        <span className='btn secondary-button logged-in'>
+          Logged In
+        </span>
+      )
+    }
+
+    if (followStatus === "accepted") {
+      return (
+        <button 
+          className='btn secondary-button following'
+          onClick={() => handleUnFollowUser(user.username)}
+        >
+          Following
+        </button>
+      )
+    }
+
+    if (followStatus === "pending") {
+      return (
+        <button 
+          className='btn secondary-button requested'
+          onClick={() => handleUnFollowUser(user.username)}
+        >
+          Requested
+        </button>
+      )
+    }
+
+    return (
+      <button 
+        className='btn secondary-button follow'
+        onClick={() => handleFollowUser(user.username)}
+      >
+        Follow
+      </button>
+    )
+  }
 
   return (
     <div className="post">
@@ -11,10 +57,8 @@ const Post = ({ user, post, loading, handleLikePost, handleUnLikePost }) => {
         <div className="img-wrapper">
           <img src={user?.profileImage} alt="" />
         </div>
-        <p className="username">{user.username}</p>
-        <button className='btn secondary-button'
-          onClick={() => { user.isFollowed ? handleUnFollowUser(user.username) : handleFollowUser(user.username) }}>
-          {user.isFollowed ? "unFollow" : "Follow"}</button>
+        <p className="username">{user?.username}</p>
+        {renderFollowButton()}
       </div>
       <img src={post.imgURL} alt="" />
       <div className="icons">

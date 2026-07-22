@@ -3,6 +3,7 @@ const ImageKit = require("@imagekit/nodejs")
 const { toFile } = require("@imagekit/nodejs")
 const jwt = require("jsonwebtoken");
 const likeModel = require("../models/like.model");
+const followModel = require("../models/follows.model");
 
 const imageKit = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
@@ -134,6 +135,15 @@ async function getFeedController(req, res) {
       })
 
       post.isLiked = Boolean(isLiked)
+
+      if (post.user) {
+        const followRecord = await followModel.findOne({
+          follower: User._id,
+          followee: post.user._id
+        })
+        post.user.followStatus = followRecord ? followRecord.status : "none"
+        post.user.isFollowed = followRecord ? (followRecord.status === "accepted") : false
+      }
 
       return post
     }))

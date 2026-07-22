@@ -1,55 +1,30 @@
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { PostContext } from "../Post.context";
-import { getFeed, createPost, likePost, unLikePost } from "../services/post.api";
+import {
+  fetchFeed,
+  createPostThunk,
+  likePostThunk,
+  unLikePostThunk
+} from "../../../store/slices/postSlice";
 
 export const usePost = () => {
+  const dispatch = useDispatch()
+  const { feed, loading } = useSelector((state) => state.posts)
 
-  const context = useContext(PostContext)
-  if (!context) {
-    throw new Error("usePost must be used inside PostProvider")
-  }
-  const { loading, setLoading, feed, setFeed, post, setPost } = context
-
-  const handleGetFeed = async () => {
-
-    setLoading(true)
-    const data = await getFeed()
-    setFeed(data.posts.reverse())
-    setLoading(false)
-
+  const handleGetFeed = () => {
+    dispatch(fetchFeed())
   }
 
   const handleCreatePost = async (imgURL, caption) => {
-
-    setLoading(true)
-    const data = await createPost(imgURL, caption)
-    setFeed(preFeed => [data.post, ...preFeed])
-    setLoading(false)
-
+    await dispatch(createPostThunk({ imgURL, caption })).unwrap()
   }
 
   const handleLikePost = async (postId) => {
-
-    setFeed(preFeed => {
-      return preFeed.map(post => {
-        return post._id === postId ? { ...post, isLiked: true } : post
-      }
-      )
-    })
-    await likePost(postId)
+    dispatch(likePostThunk(postId))
   }
 
   const handleUnLikePost = async (postId) => {
-
-    setFeed(preFeed => {
-      return preFeed.map(post => {
-        return post._id === postId ? { ...post, isLiked: false } : post
-      }
-      )
-    })
-    await unLikePost(postId)
-
+    dispatch(unLikePostThunk(postId))
   }
 
   useEffect(() => {
@@ -57,6 +32,6 @@ export const usePost = () => {
   }, [])
 
   return {
-    loading, feed, post, handleGetFeed, handleCreatePost, handleLikePost, handleUnLikePost
+    loading, feed, handleGetFeed, handleCreatePost, handleLikePost, handleUnLikePost
   }
 }
