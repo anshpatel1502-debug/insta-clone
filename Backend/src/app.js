@@ -8,7 +8,7 @@ app.use(cookieParser())
 app.use(cors({    
   origin:process.env.FRONTEND_URL,
   credentials : true,
-  origin : "http://localhost:5173"
+  // origin : "http://localhost:5173"
 }))
 
 /* require routes */
