@@ -20,6 +20,10 @@ const authRouter = require("./routes/auth.routes")
 const postRouter = require("./routes/post.routes")
 const userRouter = require("./routes/user.routes")
 
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Server is running", timestamp: new Date() });
+});
+
 /* using routes */
 app.use("/api/auth",authRouter)
 app.use("/api/posts",postRouter)
