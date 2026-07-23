@@ -35,7 +35,8 @@ async function registerController (req,res){
 
   res.cookie("token", token, {
   httpOnly: true,
-  secure: false
+  secure: true,
+  sameSite: "None"
 })
 
   res.status(201).json({
