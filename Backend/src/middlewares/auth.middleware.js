@@ -2,10 +2,8 @@ const jwt = require("jsonwebtoken")
 const userModel = require("../models/user.model")
 
 async function identifyUser(req,res,next){
-    const authHeader = req.headers.authorization || ""
-    const tokenFromHeader = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null
-    const token = req.cookies?.token || tokenFromHeader
-
+  
+    const token = req.cookies.token 
     if (!token) {
       return res.status(401).json({   
         message: "Token is not provided,unauthorized access"
