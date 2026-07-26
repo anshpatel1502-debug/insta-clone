@@ -33,11 +33,14 @@ async function registerController (req,res){
     {expiresIn : "1d"}
   )
 
+  const isProduction = process.env.NODE_ENV === "production"
+
   res.cookie("token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "None"
-})
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "None" : "Lax",
+    path: "/",
+  })
 
   res.status(201).json({
     message : "User Register Successfully",
@@ -81,7 +84,14 @@ async function loginController  (req,res) {
     {expiresIn: "1d"}
   )
 
-  res.cookie("token",token)
+  const isProduction = process.env.NODE_ENV === "production"
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "None" : "Lax",
+    path: "/",
+  })
 
   res.status(200).json({
     message : "User LoggedIn Successfully",
